@@ -2,8 +2,13 @@
  * A class to model a simple mail item. The item has sender and recipient
  * addresses and a message string.
  * 
- * @author David J. Barnes and Michael KÃ¶lling
- * @version 2011.07.31
+ * @param from The sender of this item.
+ * @param to The intended recipient of this item.
+ * @param subject The subject of the message to be sent.
+ * @param message The text of the message to be sent.
+ * 
+ * @modificaciones (carlos alvarez
+ * @version 2018.02.24
  */
 public class MailItem
 {
@@ -15,7 +20,7 @@ public class MailItem
     private String message;
     // The subject of the message.
     private String subject;
-
+    
     /**
      * Create a mail item from sender to the given recipient,
      * containing the given message.
@@ -54,15 +59,40 @@ public class MailItem
     {
         return message;
     }
-
+      
     /**
-     * Print this mail message to the text terminal.
+     *  Devuelve un valor true si en el mensaje aparece una cadena inválida.
+     *  En caso contrario, devuelve false
+     */
+    public boolean comprobarSpam()
+    {
+        boolean esSpam = false;
+       if (getMessage().toLowerCase().indexOf("viagra") > 0)
+        {
+            esSpam = true;
+       }
+        if (getMessage().toLowerCase().indexOf("regalo") > 0)
+        {
+            esSpam = true;
+        }
+        return esSpam;
+    }
+    
+    /**
+     * Sout mensajes de Email.
      */
     public void print()
-    {
-        System.out.println("From: " + from);
-        System.out.println("To: " + to);
-        System.out.println("Message: " + message);
-        System.out.println("subject: " + subject);
+    {   
+        if(comprobarSpam())
+        {
+            System.out.println("Spam");
+        }
+       else
+        {
+            System.out.println("From: " + from);
+            System.out.println("To: " + to);
+            System.out.println("Message: " + message);
+            System.out.println("subject: " + subject);
+        }
     }
 }
